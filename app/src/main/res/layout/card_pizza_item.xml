@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:layout_marginBottom="24dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        tools:src="@drawable/pizza"
+        android:layout_marginStart="16dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title"
+            android:textSize="18sp"
+            android:fontFamily="@font/inter_bold"
+            tools:text="Пепперони"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/info"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_regular"
+            tools:text="Пикантная пепперони, увеличенная порция моцареллы, фирменный томатный соус"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title"
+            android:textSize="18sp"
+            android:fontFamily="@font/inter_bold"
+            tools:text="от 299 ₽"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+

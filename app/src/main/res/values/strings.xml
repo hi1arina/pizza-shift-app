@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PizzaShiftApp</string>
+    <string name="app_name">ШИФТ Пицца</string>
+    <string name="title_mainpage">Пицца</string>
 </resources>
