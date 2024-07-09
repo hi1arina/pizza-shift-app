@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pizzashiftapp.databinding.CatalogPageBinding
 import com.example.pizzashiftapp.presentation.CatalogViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +29,6 @@ class CatalogFragment : Fragment(), KoinComponent {
         super.onViewCreated(view, savedInstanceState)
 
         catalogAdapter = CatalogAdapter()
-        binding.pizzaCatalog.layoutManager = LinearLayoutManager(requireContext())
         binding.pizzaCatalog.adapter = catalogAdapter
 
         catalogViewModel.pizzas.observe(viewLifecycleOwner) { pizzas ->
