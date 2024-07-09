@@ -1,7 +1,6 @@
 package com.example.pizzashiftapp.screen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,25 +15,34 @@ class CatalogFragment : Fragment(), KoinComponent {
 
     private lateinit var catalogAdapter: CatalogAdapter
     private val catalogViewModel: CatalogViewModel by viewModel()
-    private lateinit var binding: CatalogPageBinding
+    private var _binding: CatalogPageBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = CatalogPageBinding.inflate(layoutInflater)
-        catalogAdapter = CatalogAdapter()
+        _binding = CatalogPageBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        catalogAdapter = CatalogAdapter()
         binding.pizzaCatalog.layoutManager = LinearLayoutManager(requireContext())
         binding.pizzaCatalog.adapter = catalogAdapter
 
         catalogViewModel.pizzas.observe(viewLifecycleOwner) { pizzas ->
-            Log.d("CatalogFragment", "Pizzas observed: $pizzas")
             catalogAdapter.setCatalog(pizzas)
         }
 
         catalogViewModel.load()
+    }
 
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        catalogAdapter.setCatalog(emptyList())
     }
 }
