@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ШИФТ Пицца</string>
     <string name="title_mainpage">Пицца</string>
+    <string name="pizza_price">от %1$d ₽</string>
 </resources>
