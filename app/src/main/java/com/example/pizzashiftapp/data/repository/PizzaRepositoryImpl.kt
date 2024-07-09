@@ -6,6 +6,7 @@ import com.example.pizzashiftapp.data.converter.PizzaConverter
 import com.example.pizzashiftapp.data.model.PizzasResponseModel
 import com.example.pizzashiftapp.domain.model.Pizza
 import com.example.pizzashiftapp.domain.repository.PizzaRepository
+import kotlin.coroutines.cancellation.CancellationException
 
 class PizzaRepositoryImpl(
     private val api: PizzaApi
@@ -26,8 +27,10 @@ class PizzaRepositoryImpl(
                 emptyList()
             }
         } catch (e: Exception) {
-            e.printStackTrace()
-            Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
+            if (e !is CancellationException) {
+                e.printStackTrace()
+                Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
+            }
             emptyList()
         }
     }
