@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
@@ -42,11 +43,11 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() 
         fun bind(pizza: Pizza) = with(binding) {
             title.text = pizza.name
             info.text = pizza.description
-            binding.price.text = "от ${pizza.sizes.firstOrNull()?.price?.toInt() ?: 0} ₽"
+            price.text = itemView.context.getString(R.string.pizza_price, pizza.sizes.firstOrNull()?.price?.toInt() ?: 0)
 
             Glide.with(itemView.context)
                 .load("https://shift-backend.onrender.com${pizza.img}")
-                .into(binding.imageView)
+                .into(imageView)
 
         }
     }
