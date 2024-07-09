@@ -8,11 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.example.pizzashiftapp.databinding.ActivityMainBinding
-import com.example.pizzashiftapp.di.appModule
-import com.example.pizzashiftapp.di.dataModule
-import com.example.pizzashiftapp.di.domainModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 class MainActivity : AppCompatActivity() {
 
