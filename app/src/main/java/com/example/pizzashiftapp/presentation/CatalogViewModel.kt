@@ -23,14 +23,10 @@ class CatalogViewModel : ViewModel(), KoinComponent {
     fun load() {
         viewModelScope.launch {
             try {
-                val catalog = withContext(Dispatchers.IO){
-                    Log.d("CatalogViewModel", "Loading pizzas from use case")
-                    getPizzaCatalogUseCase.invoke()
-                }
-                Log.d("CatalogViewModel", "Pizzas loaded: $catalog")
+                val catalog = getPizzaCatalogUseCase.invoke()
                 _pizzas.value = catalog
             } catch (e: Exception) {
-                Log.e("CatalogViewModel", "Error loading pizzas", e)
+                Log.e("CatalogViewModel", "Ошибка загрузки пицц: ", e)
             }
         }
     }
