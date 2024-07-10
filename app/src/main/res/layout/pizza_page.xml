@@ -19,12 +19,12 @@
             android:layout_marginStart="4dp">
 
             <FrameLayout
+                android:id="@+id/arrow_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="12dp">
 
                 <ImageView
-                    android:id="@+id/arrow_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_cancel"
@@ -45,6 +45,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/pizza_img"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
@@ -52,6 +53,7 @@
             android:layout_marginTop="24dp"/>
 
         <RadioGroup
+            android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

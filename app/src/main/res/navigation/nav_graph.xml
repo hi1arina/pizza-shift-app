@@ -7,6 +7,14 @@
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.example.pizzashiftapp.screen.CatalogFragment"
-        android:label="MainPageFragment" />
+        android:label="MainPageFragment" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_pizzaFragment"
+            app:destination="@id/pizzaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pizzaFragment"
+        android:name="com.example.pizzashiftapp.screen.PizzaFragment"
+        android:label="PizzaFragment" />
 
 </navigation>
