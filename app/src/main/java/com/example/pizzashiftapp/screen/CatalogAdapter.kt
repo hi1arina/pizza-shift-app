@@ -1,9 +1,11 @@
 package com.example.pizzashiftapp.screen
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
@@ -29,6 +31,18 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
         val pizza = catalog[position]
         holder.bind(pizza)
+
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", pizza.id)
+                putString("name", pizza.name)
+                putStringArray("ingredients", pizza.ingredients.map { it.name }.toTypedArray())
+                putStringArray("price", pizza.sizes.map { it.price.toString() }.toTypedArray())
+                putString("img", pizza.img)
+            }
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_mainPageFragment_to_pizzaFragment, bundle)
+        }
     }
 
     override fun getItemCount(): Int {

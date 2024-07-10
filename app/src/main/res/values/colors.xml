@@ -2,9 +2,17 @@
 <resources>
     <color name="black">#141C24</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF5722</color>
 
     <color name="title">#292929</color>
     <color name="info">#535353</color>
     <color name="price">#292929</color>
+
+    <color name="fond">#60CED2DA</color>
+
+    <color name="switcher_background">#60CED2DA</color>
+    <color name="switcher_selected">#FFFFFF</color>
+    <color name="switcher_text_selected">#141C24</color>
+    <color name="switcher_text_unselected">#535353</color>
 
 </resources>
