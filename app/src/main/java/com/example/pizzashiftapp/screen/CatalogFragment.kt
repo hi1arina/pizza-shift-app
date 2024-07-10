@@ -34,7 +34,6 @@ class CatalogFragment : Fragment(), KoinComponent {
         catalogViewModel.pizzas.observe(viewLifecycleOwner) { pizzas ->
             catalogAdapter.setCatalog(pizzas)
         }
-
         catalogViewModel.load()
     }
 
