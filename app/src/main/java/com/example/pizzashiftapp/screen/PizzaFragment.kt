@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.PizzaPageBinding
+import com.example.pizzashiftapp.domain.model.Pizza
 import org.koin.core.component.KoinComponent
 
 class PizzaFragment : Fragment(), KoinComponent {
@@ -16,8 +17,7 @@ class PizzaFragment : Fragment(), KoinComponent {
     private var _binding: PizzaPageBinding? = null
     private val binding get() = _binding!!
 
-    private var pizzaId: Int = 0
-    private lateinit var price: Array<String>
+    private lateinit var pizza: Pizza
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,31 +30,40 @@ class PizzaFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.arrowIcon.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        binding.arrowIcon.setOnClickListener { findNavController().navigateUp() }
 
-        arguments?.let {
-            pizzaId = it.getInt("id")
-            binding.pizzaTitle.text = it.getString("name")
-            binding.pizzaIngredient.text = it.getStringArray("ingredients")?.joinToString(separator = ", ")
-            val img = it.getString("img")
-            Glide.with(binding.pizzaImg.context)
-                .load(img)
-                .into(binding.pizzaImg)
-            price = it.getStringArray("price")!!
-        }
+        arguments?.getSerializable("pizza")?.let { pizza = it as Pizza }
 
-        binding.radioGroup.check(R.id.medium)
-        binding.buttonToCart.text = getString(R.string.add_to_cart, price[1].toDouble().toInt())
+        setupUi()
+    }
 
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.small -> binding.buttonToCart.text = getString(R.string.add_to_cart, price[0].toDouble().toInt())
-                R.id.medium -> binding.buttonToCart.text = getString(R.string.add_to_cart, price[1].toDouble().toInt())
-                R.id.large -> binding.buttonToCart.text = getString(R.string.add_to_cart, price[2].toDouble().toInt())
+    private fun setupUi() {
+        with(binding){
+
+            pizzaTitle.text = pizza.name
+            pizzaIngredient.text = pizza.ingredients.joinToString(separator = ", ") { it.name }
+
+            Glide.with(pizzaImg.context)
+                .load(pizza.img)
+                .into(pizzaImg)
+
+            radioGroup.check(R.id.medium)
+            updateButtonToCart(pizza.sizes[1].price.toString())
+
+            radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                val price = when (checkedId) {
+                    R.id.small -> pizza.sizes[0].price
+                    R.id.medium -> pizza.sizes[1].price
+                    R.id.large -> pizza.sizes[2].price
+                    else -> pizza.sizes[1].price
+                }
+                updateButtonToCart(price.toString())
             }
         }
+    }
+
+    private fun updateButtonToCart(price: String) {
+        binding.buttonToCart.text = getString(R.string.add_to_cart, price.toDouble().toInt())
     }
 
     override fun onDestroyView() {

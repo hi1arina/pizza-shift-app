@@ -1,5 +1,7 @@
 package com.example.pizzashiftapp.domain.model
 
+import java.io.Serializable
+
 data class Pizza(
     val id: Int,
     val name: String,
@@ -19,4 +21,4 @@ data class Pizza(
     val isNew: Boolean,
     val isHit: Boolean,
     val img: String
-)
+) : Serializable

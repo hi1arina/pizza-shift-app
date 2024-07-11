@@ -34,11 +34,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() 
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putInt("id", pizza.id)
-                putString("name", pizza.name)
-                putStringArray("ingredients", pizza.ingredients.map { it.name }.toTypedArray())
-                putStringArray("price", pizza.sizes.map { it.price.toString() }.toTypedArray())
-                putString("img", pizza.img)
+                putSerializable("pizza", pizza)
             }
 
             Navigation.findNavController(holder.itemView).navigate(R.id.action_mainPageFragment_to_pizzaFragment, bundle)
