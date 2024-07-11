@@ -161,7 +161,7 @@
         android:textSize="12sp"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/info"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/allergen"

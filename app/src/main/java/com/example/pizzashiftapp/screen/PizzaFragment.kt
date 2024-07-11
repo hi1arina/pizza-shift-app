@@ -34,6 +34,13 @@ class PizzaFragment : Fragment(), KoinComponent {
 
         arguments?.getSerializable("pizza")?.let { pizza = it as Pizza }
 
+        binding.infoIcon.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("pizza", pizza)
+            }
+            findNavController().navigate(R.id.action_pizzaFragment_to_nutritionDialogFragment, bundle)
+        }
+
         setupUi()
     }
 

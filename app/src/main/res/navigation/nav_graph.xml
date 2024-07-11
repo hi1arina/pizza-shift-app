@@ -15,6 +15,14 @@
     <fragment
         android:id="@+id/pizzaFragment"
         android:name="com.example.pizzashiftapp.screen.PizzaFragment"
-        android:label="PizzaFragment" />
+        android:label="PizzaFragment" >
+        <action
+            android:id="@+id/action_pizzaFragment_to_nutritionDialogFragment"
+            app:destination="@id/nutritionDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/nutritionDialogFragment"
+        android:name="com.example.pizzashiftapp.screen.NutritionDialogFragment"
+        android:label="NutritionDialogFragment" />
 
 </navigation>
