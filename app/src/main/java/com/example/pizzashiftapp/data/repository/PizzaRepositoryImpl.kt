@@ -9,11 +9,10 @@ import com.example.pizzashiftapp.domain.repository.PizzaRepository
 import kotlin.coroutines.cancellation.CancellationException
 
 class PizzaRepositoryImpl(
-    private val api: PizzaApi
+    private val api: PizzaApi,
+    private val converter: PizzaConverter
+
 ): PizzaRepository {
-
-    private val converter = PizzaConverter()
-
     override suspend fun getAll(): List<Pizza> {
         return try {
             val response: PizzasResponseModel = api.getAll()
@@ -26,13 +25,11 @@ class PizzaRepositoryImpl(
                 Log.i("PizzaRepositoryImpl", "API провал :( : ${response.reason}")
                 emptyList()
             }
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
-            if (e !is CancellationException) {
-                e.printStackTrace()
-                Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
-            }
+            Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
             emptyList()
         }
     }
-
 }

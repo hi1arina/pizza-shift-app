@@ -59,7 +59,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() 
             price.text = itemView.context.getString(R.string.pizza_price, pizza.sizes.firstOrNull()?.price?.toInt() ?: 0)
 
             Glide.with(itemView.context)
-                .load("https://shift-backend.onrender.com${pizza.img}")
+                .load(pizza.img)
                 .into(imageView)
 
         }
