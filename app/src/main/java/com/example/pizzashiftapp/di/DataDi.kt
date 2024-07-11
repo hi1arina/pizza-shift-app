@@ -36,7 +36,7 @@ val dataModule = module {
     }
 
     single<PizzaIngredientConverter> {
-        PizzaIngredientConverter()
+        PizzaIngredientConverter(get())
     }
 
     single<PizzaSizeConverter> {

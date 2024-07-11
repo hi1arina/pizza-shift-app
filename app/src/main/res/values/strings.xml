@@ -9,6 +9,8 @@
 
     <string name="add_to_cart">В корзину за %1$d ₽</string>
 
+    <string name="topping_cost">%1$d ₽</string>
+
     <string name="nutrition">Пищевая ценность на 100г</string>
 
     <string name="calories">Калории</string>

@@ -14,6 +14,7 @@ import org.koin.core.component.KoinComponent
 
 class PizzaFragment : Fragment(), KoinComponent {
 
+    private lateinit var toppingAdapter: ToppingAdapter
     private var _binding: PizzaPageBinding? = null
     private val binding get() = _binding!!
 
@@ -67,6 +68,10 @@ class PizzaFragment : Fragment(), KoinComponent {
                 updateButtonToCart(price.toString())
             }
         }
+
+        toppingAdapter = ToppingAdapter()
+        binding.toppingsSet.adapter = toppingAdapter
+        toppingAdapter.setCatalog(pizza.toppings)
     }
 
     private fun updateButtonToCart(price: String) {
