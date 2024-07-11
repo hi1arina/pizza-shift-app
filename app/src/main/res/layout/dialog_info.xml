@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nutrition"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/info"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_marginTop="8dp">
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:id="@+id/calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="end"
+                tools:text="283,9"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="start"
+                android:text="@string/kcal"
+                android:textColor="@color/title"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/protein"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:id="@+id/protein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="end"
+                tools:text="11,5"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="start"
+                android:text="@string/grams"
+                android:textColor="@color/title"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_fat"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:id="@+id/totalFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="end"
+                tools:text="11,4"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="start"
+                android:text="@string/grams"
+                android:textColor="@color/title"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carbohydrates"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:id="@+id/carbohydrates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="end"
+                tools:text="31,9"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="start"
+                android:text="@string/grams"
+                android:textColor="@color/title"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sodium"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:id="@+id/sodium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="end"
+                tools:text="719"
+                android:textColor="@color/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:gravity="start"
+                android:text="@string/milligrams"
+                android:textColor="@color/title"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allergens"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/info"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/allergen"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        tools:text="Глютен, молоко и продукты его переработки"
+        android:textSize="14sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/title"/>
+
+</LinearLayout>

@@ -15,4 +15,6 @@
     <color name="switcher_text_selected">#141C24</color>
     <color name="switcher_text_unselected">#535353</color>
 
+    <color name="dialog_background">#50FFFFFF</color>
+
 </resources>
