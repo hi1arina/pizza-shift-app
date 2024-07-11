@@ -25,13 +25,11 @@ class PizzaRepositoryImpl(
                 Log.i("PizzaRepositoryImpl", "API провал :( : ${response.reason}")
                 emptyList()
             }
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
-            if (e !is CancellationException) {
-                e.printStackTrace()
-                Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
-            }
+            Log.e("PizzaRepositoryImpl", "Exception: ${e.localizedMessage}")
             emptyList()
         }
     }
-
 }

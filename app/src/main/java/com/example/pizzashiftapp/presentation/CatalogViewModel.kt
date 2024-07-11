@@ -10,6 +10,7 @@ import com.example.pizzashiftapp.domain.usecase.GetPizzaCatalogUseCase
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import kotlin.coroutines.cancellation.CancellationException
 
 class CatalogViewModel : ViewModel(), KoinComponent {
 
@@ -23,6 +24,8 @@ class CatalogViewModel : ViewModel(), KoinComponent {
             try {
                 val catalog = getPizzaCatalogUseCase.invoke()
                 _pizzas.value = catalog
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 Log.e("CatalogViewModel", "Ошибка загрузки пицц: ", e)
             }
