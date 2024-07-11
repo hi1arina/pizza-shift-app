@@ -6,7 +6,8 @@ import com.example.pizzashiftapp.domain.model.Pizza
 class PizzaConverter(
     private val ingredientConverter: PizzaIngredientConverter,
     private val sizeConverter: PizzaSizeConverter,
-    private val doughConverter: PizzaDoughsConverter
+    private val doughConverter: PizzaDoughsConverter,
+    private val baseUrl: String
 ) {
     fun convert(from: PizzaModel): Pizza =
         with (from) {
@@ -28,7 +29,7 @@ class PizzaConverter(
                 isGlutenFree = isGlutenFree,
                 isNew = isNew,
                 isHit = isHit,
-                img = img
+                img = "$baseUrl$img"
             )
         }
 }

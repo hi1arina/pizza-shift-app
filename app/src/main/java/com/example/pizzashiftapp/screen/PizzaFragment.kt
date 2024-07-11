@@ -40,7 +40,7 @@ class PizzaFragment : Fragment(), KoinComponent {
             binding.pizzaIngredient.text = it.getStringArray("ingredients")?.joinToString(separator = ", ")
             val img = it.getString("img")
             Glide.with(binding.pizzaImg.context)
-                .load("https://shift-backend.onrender.com${img}")
+                .load(img)
                 .into(binding.pizzaImg)
             price = it.getStringArray("price")!!
         }

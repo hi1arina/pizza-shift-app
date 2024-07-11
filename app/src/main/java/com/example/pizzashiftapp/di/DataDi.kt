@@ -47,8 +47,10 @@ val dataModule = module {
         PizzaDoughsConverter()
     }
 
+    single { "https://shift-backend.onrender.com" }
+
     single<PizzaConverter> {
-        PizzaConverter(get(), get(), get())
+        PizzaConverter(get(), get(), get(), get())
     }
 
     single<PizzaResponseConverter> {
