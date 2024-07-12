@@ -10,6 +10,7 @@ import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.DialogInfoBinding
 import com.example.pizzashiftapp.domain.model.Pizza
 import com.example.pizzashiftapp.presentation.NutritionViewModel
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NutritionDialogFragment : DialogFragment() {
@@ -17,6 +18,7 @@ class NutritionDialogFragment : DialogFragment() {
     private var _binding: DialogInfoBinding? = null
     private val binding get() = _binding!!
     private val nutritionViewModel: NutritionViewModel by viewModel()
+    private val gson = Gson()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -35,8 +37,9 @@ class NutritionDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getSerializable("pizza")?.let {
-            nutritionViewModel.setNutrition(it as Pizza)
+        arguments?.getString("pizza")?.let { pizzaJson ->
+            val pizza = gson.fromJson(pizzaJson, Pizza::class.java)
+            nutritionViewModel.setNutrition(pizza)
         }
 
         nutritionViewModel.nutrition.observe(viewLifecycleOwner) { nutrition ->

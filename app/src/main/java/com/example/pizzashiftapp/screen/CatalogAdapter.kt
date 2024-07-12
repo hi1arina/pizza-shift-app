@@ -11,11 +11,12 @@ import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.CardPizzaItemBinding
 import com.example.pizzashiftapp.domain.model.Pizza
-
+import com.google.gson.Gson
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() {
 
     private var catalog: List<Pizza> = emptyList()
+    private val gson = Gson()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setCatalog(pizzas: List<Pizza>) {
@@ -34,7 +35,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() 
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable("pizza", pizza)
+                putString("pizza", gson.toJson(pizza))
             }
 
             Navigation.findNavController(holder.itemView).navigate(R.id.action_mainPageFragment_to_pizzaFragment, bundle)
