@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.CardToppingItemBinding
 import com.example.pizzashiftapp.domain.model.PizzaIngredient
+import com.example.pizzashiftapp.domain.model.PizzaIngredientType
+import com.example.pizzashiftapp.domain.model.ingredientTranslationMap
 
 class ToppingAdapter : RecyclerView.Adapter<ToppingAdapter.ToppingViewHolder>() {
 
@@ -39,13 +41,21 @@ class ToppingAdapter : RecyclerView.Adapter<ToppingAdapter.ToppingViewHolder>() 
         private val binding = CardToppingItemBinding.bind(view)
 
         fun bind(ingredient: PizzaIngredient) = with(binding) {
-            title.text = ingredient.name
+
+            val ingredientRu = translateIngredient(ingredient.name)
+            title.text = ingredientRu
+
             price.text = itemView.context.getString(R.string.topping_cost, ingredient.cost.toInt())
 
             Glide.with(itemView.context)
                 .load(ingredient.img)
                 .into(imageView)
 
+        }
+
+        private fun translateIngredient(name: String): String {
+            val type = PizzaIngredientType.entries.find { it.name.equals(name, ignoreCase = true) }
+            return type?.let { ingredientTranslationMap[it] } ?: name
         }
     }
 }

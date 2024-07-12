@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.PizzaPageBinding
 import com.example.pizzashiftapp.domain.model.Pizza
+import com.example.pizzashiftapp.domain.model.PizzaIngredientType
+import com.example.pizzashiftapp.domain.model.ingredientTranslationMap
 import com.example.pizzashiftapp.presentation.PizzaViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -60,7 +62,11 @@ class PizzaFragment : Fragment() {
         with(binding){
 
             pizzaTitle.text = pizza.name
-            pizzaIngredient.text = pizza.ingredients.joinToString(separator = ", ") { it.name }
+
+            val ingredientsRu = pizza.ingredients.joinToString(separator = ", ") {
+                translateIngredient(it.name)
+            }
+            pizzaIngredient.text = ingredientsRu
 
             Glide.with(pizzaImg.context)
                 .load(pizza.img)
@@ -78,6 +84,12 @@ class PizzaFragment : Fragment() {
     private fun updateButtonToCart(price: String) {
         binding.buttonToCart.text = getString(R.string.add_to_cart, price.toDouble().toInt())
     }
+
+    private fun translateIngredient(name: String): String {
+        val type = PizzaIngredientType.entries.find { it.name.equals(name, ignoreCase = true) }
+        return type?.let { ingredientTranslationMap[it] } ?: name
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
