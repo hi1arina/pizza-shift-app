@@ -132,7 +132,7 @@
                         android:textColor="@color/info"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter_medium"
-                        android:layout_margin="8dp"/>
+                        android:layout_margin="16dp"/>
 
                     <ImageView
                         android:id="@+id/info_icon"
