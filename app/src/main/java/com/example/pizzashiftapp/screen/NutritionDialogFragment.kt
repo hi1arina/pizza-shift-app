@@ -9,13 +9,14 @@ import androidx.fragment.app.DialogFragment
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.DialogInfoBinding
 import com.example.pizzashiftapp.domain.model.Pizza
+import com.example.pizzashiftapp.presentation.NutritionViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NutritionDialogFragment : DialogFragment() {
 
     private var _binding: DialogInfoBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var pizza: Pizza
+    private val nutritionViewModel: NutritionViewModel by viewModel()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -34,12 +35,16 @@ class NutritionDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getSerializable("pizza")?.let { pizza = it as Pizza }
+        arguments?.getSerializable("pizza")?.let {
+            nutritionViewModel.setNutrition(it as Pizza)
+        }
 
-        setupUi()
+        nutritionViewModel.nutrition.observe(viewLifecycleOwner) { nutrition ->
+            setupUi(nutrition)
+        }
     }
 
-    private fun setupUi() {
+    private fun setupUi(pizza: Pizza) {
         with(binding) {
             calories.text = pizza.calories.toInt().toString()
             protein.text = justNumber(pizza.protein)
