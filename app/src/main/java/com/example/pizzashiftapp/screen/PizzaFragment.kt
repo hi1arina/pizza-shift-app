@@ -13,6 +13,7 @@ import com.example.pizzashiftapp.domain.model.Pizza
 import com.example.pizzashiftapp.domain.model.PizzaIngredientType
 import com.example.pizzashiftapp.domain.model.ingredientTranslationMap
 import com.example.pizzashiftapp.presentation.PizzaViewModel
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PizzaFragment : Fragment() {
@@ -21,6 +22,7 @@ class PizzaFragment : Fragment() {
     private var _binding: PizzaPageBinding? = null
     private val binding get() = _binding!!
     private val pizzaViewModel: PizzaViewModel by viewModel()
+    private val gson = Gson()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,14 +37,15 @@ class PizzaFragment : Fragment() {
 
         binding.arrowIcon.setOnClickListener { findNavController().navigateUp() }
 
-        arguments?.getSerializable("pizza")?.let { pizza ->
-            pizzaViewModel.setPizza(pizza as Pizza)
+        arguments?.getString("pizza")?.let { pizzaJson ->
+            val pizza = gson.fromJson(pizzaJson, Pizza::class.java)
+            pizzaViewModel.setPizza(pizza)
         }
 
         binding.infoIcon.setOnClickListener {
             pizzaViewModel.pizza.value?.let { pizza ->
                 val bundle = Bundle().apply {
-                    putSerializable("pizza", pizza)
+                    putString("pizza", gson.toJson(pizza))
                 }
                 findNavController().navigate(R.id.action_pizzaFragment_to_nutritionDialogFragment, bundle)
             }
