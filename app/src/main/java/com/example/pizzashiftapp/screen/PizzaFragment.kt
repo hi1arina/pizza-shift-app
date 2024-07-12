@@ -10,15 +10,15 @@ import com.bumptech.glide.Glide
 import com.example.pizzashiftapp.R
 import com.example.pizzashiftapp.databinding.PizzaPageBinding
 import com.example.pizzashiftapp.domain.model.Pizza
-import org.koin.core.component.KoinComponent
+import com.example.pizzashiftapp.presentation.PizzaViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PizzaFragment : Fragment(), KoinComponent {
+class PizzaFragment : Fragment() {
 
     private lateinit var toppingAdapter: ToppingAdapter
     private var _binding: PizzaPageBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var pizza: Pizza
+    private val pizzaViewModel: PizzaViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,19 +33,30 @@ class PizzaFragment : Fragment(), KoinComponent {
 
         binding.arrowIcon.setOnClickListener { findNavController().navigateUp() }
 
-        arguments?.getSerializable("pizza")?.let { pizza = it as Pizza }
-
-        binding.infoIcon.setOnClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("pizza", pizza)
-            }
-            findNavController().navigate(R.id.action_pizzaFragment_to_nutritionDialogFragment, bundle)
+        arguments?.getSerializable("pizza")?.let { pizza ->
+            pizzaViewModel.setPizza(pizza as Pizza)
         }
 
-        setupUi()
+        binding.infoIcon.setOnClickListener {
+            pizzaViewModel.pizza.value?.let { pizza ->
+                val bundle = Bundle().apply {
+                    putSerializable("pizza", pizza)
+                }
+                findNavController().navigate(R.id.action_pizzaFragment_to_nutritionDialogFragment, bundle)
+            }
+        }
+
+        pizzaViewModel.pizza.observe(viewLifecycleOwner) { pizza ->
+            setupUi(pizza)
+        }
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val price = pizzaViewModel.getPrice(checkedId)
+            updateButtonToCart(price.toString())
+        }
     }
 
-    private fun setupUi() {
+    private fun setupUi(pizza: Pizza) {
         with(binding){
 
             pizzaTitle.text = pizza.name
@@ -57,16 +68,6 @@ class PizzaFragment : Fragment(), KoinComponent {
 
             radioGroup.check(R.id.medium)
             updateButtonToCart(pizza.sizes[1].price.toString())
-
-            radioGroup.setOnCheckedChangeListener { _, checkedId ->
-                val price = when (checkedId) {
-                    R.id.small -> pizza.sizes[0].price
-                    R.id.medium -> pizza.sizes[1].price
-                    R.id.large -> pizza.sizes[2].price
-                    else -> pizza.sizes[1].price
-                }
-                updateButtonToCart(price.toString())
-            }
         }
 
         toppingAdapter = ToppingAdapter()
